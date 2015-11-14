@@ -1146,7 +1146,7 @@ PyObject *EscapeQueryArguments(Connection *self, PyObject *inQuery, PyObject *it
       if (arg == NULL)
       {
         Py_DECREF(iterator);
-        if (heap) PyObject_Free(obuffer);
+        if (heap) PyMem_Free(obuffer);
         return PyErr_Format (PyExc_ValueError, "Unexpected end of iterator found");
       }
 
@@ -1156,7 +1156,7 @@ PyObject *EscapeQueryArguments(Connection *self, PyObject *inQuery, PyObject *it
       if (appendLen == -1)
       {
         Py_DECREF(iterator);
-        if (heap) PyObject_Free(obuffer);
+        if (heap) PyMem_Free(obuffer);
         return NULL;
       }
 
@@ -1178,7 +1178,7 @@ END_PARSE:
 
   if (heap)
   {
-    PyObject_Free(obuffer);
+    PyMem_Free(obuffer);
   }
 
   return retobj;
